@@ -13,6 +13,45 @@
 
         <h1>#{testView.string}</h1>
         <h:form id="frmTest">
+        	<p:dataTable  id="products"
+								 value="#{dtBasicView.products}"
+								 var="item"
+								 rowIndexVar="row"
+								 rowStyleClass="table-row-hilite"
+								 emptyMessage="#{labels['base.record.notfound']}"
+								 style="margin-top: 1em;" sortBy="#{item.name}">
+						 <f:facet name="header">
+				            <div class="p-d-flex p-jc-between p-ai-center">
+				                List of Products
+				
+				                <div>
+				                    <p:commandButton id="toggler" type="button" value="Columns" icon="pi pi-align-justify"/>
+				                    <p:columnToggler datasource="products" trigger="toggler"/>
+				                </div>
+				            </div>
+				        </f:facet>
+						<p:column headerText="row number"
+								  styleClass="to-right"
+								  width="25">
+							<h:outputText value="#{row + 1}" />
+						</p:column>
+						
+						<p:column field="name" headerText="Name" sortBy="#{item.name}" groupRow="true">
+							<h:outputText value="#{item.name}" /> 
+						</p:column>
+			            <p:column field="#{item.code}" headerText="Code" sortable="false" filterable="false">
+			            	<h:outputText value="#{item.code}" />
+			             </p:column>
+			             
+						<p:column headerText="Category">
+							<h:outputText value="#{item.category}" />
+						</p:column>
+					 
+						<p:column headerText="Quantity">
+							<h:outputText value="#{item.quantity}" />
+						</p:column>
+						 
+					</p:dataTable>
             
         </h:form>
 
